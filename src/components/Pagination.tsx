@@ -10,7 +10,7 @@ export default function Pagination({
     onPageChange,
 }: PaginationProps) {
     return (
-        <div className="flex justify-between items-center mt-6">
+        <div className="flex justify-between items-center mt-6 flex-col md:flex-row gap-2">
             <span className="text-gray-700">Página {currentPage}</span>
 
             <div className="flex gap-3">
