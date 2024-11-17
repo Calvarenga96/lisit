@@ -8,6 +8,7 @@ import People from "./app/people/People";
 import Planets from "./app/planets/Planets";
 import Starships from "./app/starships/Starships";
 import Error from "./app/error/Error";
+import PersonDetails from "./app/people/PersonDetails";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -20,6 +21,11 @@ export const router = createBrowserRouter(
             <Route
                 path="/people"
                 element={<People />}
+                errorElement={<Error />}
+            />
+            <Route
+                path="/people/:id"
+                element={<PersonDetails />}
                 errorElement={<Error />}
             />
             <Route

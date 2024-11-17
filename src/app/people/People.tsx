@@ -6,6 +6,7 @@ import Pagination from "@/components/Pagination";
 import usePeople from "@/hooks/usePeople";
 import LoaderLayout from "@/components/LoaderLayout";
 import TitleAndSearch from "@/components/TitleAndSearch";
+import { Link } from "react-router-dom";
 
 export default function People() {
     const [searchQuery, setSearchQuery] = useState("");
@@ -37,7 +38,9 @@ export default function People() {
                     <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 min-h-[500px]">
                         {data?.results.map((person: any) => (
                             <li key={person.name}>
-                                <Card title={person.name} />
+                                <Link to={`/people/${person.name}`}>
+                                    <Card title={person.name} />
+                                </Link>
                             </li>
                         ))}
                     </ul>
