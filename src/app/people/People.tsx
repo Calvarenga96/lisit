@@ -3,7 +3,7 @@ import Layout from "@/components/Layout";
 import Card from "@/components/Card";
 import ErrorMessage from "@/components/ErrorMessage";
 import Pagination from "@/components/Pagination";
-import usePeople from "@/hooks/usePeople";
+import usePeople from "@/hooks/people/usePeople";
 import LoaderLayout from "@/components/LoaderLayout";
 import TitleAndSearch from "@/components/TitleAndSearch";
 import { Link } from "react-router-dom";

@@ -1,14 +1,14 @@
 import { useParams } from "react-router-dom";
 import Layout from "@/components/Layout";
 import LoaderLayout from "@/components/LoaderLayout";
-import { usePersonDetails } from "@/hooks/people/usePersonDetails";
 import DetailsCard from "@/components/DetailsCard";
 import ErrorMessage from "@/components/ErrorMessage";
+import { useStarshipDetails } from "@/hooks/starships/useStashipDetails";
 
-export default function PersonDetails() {
+export default function StarshipDetails() {
     const { id } = useParams();
-    const { person, isLoading, isError, refetch, errorMessage } =
-        usePersonDetails(id);
+    const { starship, isLoading, isError, refetch, errorMessage } =
+        useStarshipDetails(id);
 
     if (isLoading) {
         return (
@@ -29,7 +29,7 @@ export default function PersonDetails() {
     return (
         <Layout>
             <div className="flex justify-center items-center flex-col h-screen p-2 md:p-2 lg:p-0">
-                {person && <DetailsCard data={person} type="person" />}
+                {starship && <DetailsCard data={starship} type="starship" />}
             </div>
         </Layout>
     );

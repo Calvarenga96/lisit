@@ -5,19 +5,23 @@ import {
     Navigate,
 } from "react-router-dom";
 import People from "./app/people/People";
+import PersonDetails from "./app/people/PersonDetails";
 import Planets from "./app/planets/Planets";
 import Starships from "./app/starships/Starships";
+import StarshipsDetail from "./app/starships/StarshipDetails";
 import Error from "./app/error/Error";
-import PersonDetails from "./app/people/PersonDetails";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
         <>
+            {/* Redirect to people */}
             <Route
                 path="/"
                 element={<Navigate to="/people" replace />}
                 errorElement={<Error />}
             />
+
+            {/* PEOPLE ROUTER */}
             <Route
                 path="/people"
                 element={<People />}
@@ -28,14 +32,28 @@ export const router = createBrowserRouter(
                 element={<PersonDetails />}
                 errorElement={<Error />}
             />
+
+            {/* PLANETS ROUTER */}
             <Route
                 path="/planets"
                 element={<Planets />}
                 errorElement={<Error />}
             />
             <Route
+                path="/planets/:id"
+                element={<Planets />}
+                errorElement={<Error />}
+            />
+
+            {/* STARSHIPS ROUTER */}
+            <Route
                 path="/starships"
                 element={<Starships />}
+                errorElement={<Error />}
+            />
+            <Route
+                path="/starships/:id"
+                element={<StarshipsDetail />}
                 errorElement={<Error />}
             />
         </>

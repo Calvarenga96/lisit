@@ -1,10 +1,24 @@
-import axios from "../../config/axios";
+import axios from "@/config/axios";
 
-export const getStarships = async ({ page = 1 }: { page: number }) => {
+interface GetStarshipsParams {
+    page: number;
+    searchQuery?: string;
+}
+
+export const getStarships = async ({
+    page = 1,
+    searchQuery = "",
+}: GetStarshipsParams) => {
+    const params = {
+        page,
+        search: searchQuery || "",
+    };
+
     try {
-        const { data } = await axios.get(`/starships/?page=${page}`);
+        const { data } = await axios.get("/starships/", { params });
         return data;
-    } catch (error) {
-        return error;
+    } catch (error: any) {
+        console.error("Error fetching starships:", error);
+        throw new Error("Error al obtener los datos de las personas.");
     }
 };

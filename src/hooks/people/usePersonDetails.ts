@@ -2,13 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import { getPeople } from "@/services/people/getPeople";
 
 interface Person {
-    name: string;
-    height: string;
-    mass: string;
-    birth_year: string;
-    gender: string;
-    hair_color: string;
-    eye_color: string;
+    results: {
+        name: string;
+        height: string;
+        mass: string;
+        birth_year: string;
+        gender: string;
+        hair_color: string;
+        eye_color: string;
+    }[];
 }
 
 export function usePersonDetails(id: string | undefined) {
@@ -18,7 +20,13 @@ export function usePersonDetails(id: string | undefined) {
         queryKey,
         queryFn: () => getPeople({ page: 1, searchQuery: id }),
         enabled: !!id,
-    });
+    }) as {
+        data: Person;
+        isLoading: boolean;
+        isError: boolean;
+        error: unknown;
+        refetch: () => void;
+    };
 
     const errorMessage = isError
         ? error instanceof Error
