@@ -3,7 +3,6 @@ import MenuLink from "./MenuLink";
 import {
     NavigationMenu,
     NavigationMenuItem,
-    NavigationMenuLink,
     NavigationMenuList,
 } from "./ui/navigation-menu";
 
