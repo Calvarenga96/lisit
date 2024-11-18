@@ -27,7 +27,13 @@ instance.interceptors.response.use(
         cancelTokenMap.delete(key);
         return response;
     },
-    (error) => Promise.reject(error)
+    (error) => {
+        if (axios.isCancel(error)) {
+            return;
+        }
+
+        return Promise.reject(error);
+    }
 );
 
 export default instance;

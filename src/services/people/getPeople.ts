@@ -17,8 +17,13 @@ export const getPeople = async ({
     };
 
     try {
-        const { data } = await axios.get("/people/", { params });
-        return data;
+        const response = await axios.get("/people/", { params });
+
+        if (!response || !response.data) {
+            throw new Error("No data received");
+        }
+
+        return response.data;
     } catch (error: any) {
         console.error("Error fetching people:", error);
         throw new Error("Error al obtener los datos de las personas.");

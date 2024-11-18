@@ -17,8 +17,13 @@ export const getStarships = async ({
     };
 
     try {
-        const { data } = await axios.get("/starships/", { params });
-        return data;
+        const response = await axios.get("/starships/", { params });
+
+        if (!response || !response.data) {
+            throw new Error("No data received");
+        }
+
+        return response.data;
     } catch (error: any) {
         console.error("Error fetching starships:", error);
         throw new Error("Error al obtener los datos de las naves.");

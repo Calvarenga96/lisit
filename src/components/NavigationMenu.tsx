@@ -34,9 +34,7 @@ export function AppNavigationMenu() {
             <NavigationMenuList className="flex gap-5">
                 {links.map((link, index) => (
                     <NavigationMenuItem key={index}>
-                        <NavigationMenuLink>
-                            <MenuLink to={link.to} label={link.label} />
-                        </NavigationMenuLink>
+                        <MenuLink to={link.to} label={link.label} />
                     </NavigationMenuItem>
                 ))}
             </NavigationMenuList>
