@@ -1,4 +1,6 @@
 import axios from "@/config/axios";
+import { ApiResponse } from "@/types/api";
+import { Starships } from "@/types/starships";
 
 interface GetStarshipsParams {
     page: number;
@@ -8,7 +10,7 @@ interface GetStarshipsParams {
 export const getStarships = async ({
     page = 1,
     searchQuery = "",
-}: GetStarshipsParams) => {
+}: GetStarshipsParams): Promise<ApiResponse<Starships>> => {
     const params = {
         page,
         search: searchQuery || "",
@@ -19,6 +21,6 @@ export const getStarships = async ({
         return data;
     } catch (error: any) {
         console.error("Error fetching starships:", error);
-        throw new Error("Error al obtener los datos de las personas.");
+        throw new Error("Error al obtener los datos de las naves.");
     }
 };

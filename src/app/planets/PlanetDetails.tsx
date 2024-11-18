@@ -1,14 +1,14 @@
 import { useParams } from "react-router-dom";
 import Layout from "@/components/Layout";
 import LoaderLayout from "@/components/LoaderLayout";
-import { usePersonDetails } from "@/hooks/people/usePersonDetails";
 import DetailsCard from "@/components/details-card/DetailsCard";
 import ErrorMessage from "@/components/ErrorMessage";
+import { usePlanetDetails } from "@/hooks/planets/usePlanetDetails";
 
-export default function PersonDetails() {
-    const { id } = useParams() as { id: string };
-    const { person, isLoading, isError, refetch, errorMessage } =
-        usePersonDetails(id);
+export default function PlanetsDetails() {
+    const { id } = useParams();
+    const { planet, isLoading, isError, refetch, errorMessage } =
+        usePlanetDetails(id, true);
 
     if (isLoading) {
         return (
@@ -29,13 +29,13 @@ export default function PersonDetails() {
     return (
         <Layout>
             <div className="flex justify-center items-center flex-col h-screen p-2 md:p-2 lg:p-0">
-                {person && (
+                {planet && (
                     <DetailsCard
-                        data={person}
-                        type="person"
-                        backLink="/people"
-                        returnTo="personas"
-                        title="personaje"
+                        data={planet}
+                        type="planet"
+                        backLink="/planets"
+                        returnTo="planetas"
+                        title="planeta"
                     />
                 )}
             </div>

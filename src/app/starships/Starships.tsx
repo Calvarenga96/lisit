@@ -36,10 +36,10 @@ export default function People() {
                     />
                     {renderLoader()}
                     <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 min-h-[500px]">
-                        {data?.results.map((person: any) => (
-                            <li key={person.name}>
-                                <Link to={`/starships/${person.name}`}>
-                                    <Card title={person.name} />
+                        {data?.results.map((starship: any) => (
+                            <li key={starship.name}>
+                                <Link to={`/starships/${starship.name}`}>
+                                    <Card title={starship.name} />
                                 </Link>
                             </li>
                         ))}

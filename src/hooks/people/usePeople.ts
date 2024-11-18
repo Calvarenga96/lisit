@@ -7,7 +7,6 @@ export default function usePeople(page: number, searchQuery: string) {
     const { data, isLoading, isFetching, isError, error, refetch } = useQuery({
         queryKey,
         queryFn: () => getPeople({ page, searchQuery }),
-        placeholderData: (previousQuery) => previousQuery?.data,
     });
 
     const errorMessage = isError

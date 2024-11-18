@@ -1,4 +1,6 @@
 import axios from "@/config/axios";
+import { ApiResponse } from "@/types/api";
+import { People } from "@/types/people";
 
 interface GetPeopleParams {
     page: number;
@@ -8,7 +10,7 @@ interface GetPeopleParams {
 export const getPeople = async ({
     page = 1,
     searchQuery = "",
-}: GetPeopleParams) => {
+}: GetPeopleParams): Promise<ApiResponse<People>> => {
     const params = {
         page,
         search: searchQuery || "",

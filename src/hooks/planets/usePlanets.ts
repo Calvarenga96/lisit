@@ -1,12 +1,12 @@
-import { getStarships } from "@/services/starships/getStarships";
+import { getPlanets } from "@/services/planets/getPlanets";
 import { useQuery } from "@tanstack/react-query";
 
-export default function useStarships(page: number, searchQuery: string) {
-    const queryKey = ["starships", page, searchQuery];
+export default function usePlanets(page: number, searchQuery: string) {
+    const queryKey = ["planets", page, searchQuery];
 
     const { data, isLoading, isFetching, isError, error, refetch } = useQuery({
         queryKey,
-        queryFn: () => getStarships({ page, searchQuery }),
+        queryFn: () => getPlanets({ page, searchQuery }),
     });
 
     const errorMessage = isError

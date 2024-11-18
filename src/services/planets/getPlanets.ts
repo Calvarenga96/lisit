@@ -1,4 +1,6 @@
 import axios from "@/config/axios";
+import { ApiResponse } from "@/types/api";
+import { Planets } from "@/types/planets";
 
 interface GetPlanetsParams {
     page: number;
@@ -8,7 +10,7 @@ interface GetPlanetsParams {
 export const getPlanets = async ({
     page = 1,
     searchQuery = "",
-}: GetPlanetsParams) => {
+}: GetPlanetsParams): Promise<ApiResponse<Planets>> => {
     const params = {
         page,
         search: searchQuery || "",
@@ -19,6 +21,6 @@ export const getPlanets = async ({
         return data;
     } catch (error: any) {
         console.error("Error fetching planets:", error);
-        throw new Error("Error al obtener los datos de las personas.");
+        throw new Error("Error al obtener los datos de los planetas.");
     }
 };
