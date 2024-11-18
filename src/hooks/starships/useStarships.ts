@@ -1,5 +1,6 @@
 import { getStarships } from "@/services/starships/getStarships";
 import { useQuery } from "@tanstack/react-query";
+import useError from "../useError";
 
 export default function useStarships(page: number, searchQuery: string) {
     const queryKey = ["starships", page, searchQuery];
@@ -9,11 +10,7 @@ export default function useStarships(page: number, searchQuery: string) {
         queryFn: () => getStarships({ page, searchQuery }),
     });
 
-    const errorMessage = isError
-        ? error instanceof Error
-            ? error.message
-            : "Error desconocido"
-        : "";
+    const errorMessage = useError(error);
 
     return { data, isLoading, isFetching, isError, errorMessage, refetch };
 }

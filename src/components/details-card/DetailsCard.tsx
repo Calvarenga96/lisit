@@ -29,12 +29,12 @@ export default function DetailsCard({
     const getTitle = () => `${title === "nave" ? "de la" : "del"} ${title}`;
 
     return (
-        <div className="p-6 max-w-4xl bg-white rounded-lg shadow-2xl w-full border-2 border-gray-800">
+        <div className="p-6 max-w-4xl bg-[#121A21] rounded-lg shadow-2xl w-full border-2 border-white">
             <header className="text-center mb-6">
                 <h1 className="text-4xl font-semibold text-yellow-400">
                     {data.name}
                 </h1>
-                <p className="text-lg text-gray-600 mt-2">
+                <p className="text-lg text-white mt-2 font-semibold">
                     Detalles {getTitle()}
                 </p>
             </header>

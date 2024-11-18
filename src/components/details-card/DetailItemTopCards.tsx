@@ -40,16 +40,14 @@ export default function DetailItemTopCards({
     const commonDetails = getCommonDetails();
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full mb-2">
             {commonDetails.map(({ label, value }) => (
                 <div
                     key={label}
-                    className="bg-gray-100 p-4 rounded-lg shadow-md"
+                    className="bg-[#243647] p-4 rounded-lg shadow-lg flex justify-between items-center"
                 >
-                    <h3 className="font-medium text-lg text-gray-700">
-                        {label}
-                    </h3>
-                    <p className="text-xl text-gray-800">{value}</p>
+                    <h3 className="font-medium text-lg text-white">{label}</h3>
+                    <p className="text-sm text-white">{value}</p>
                 </div>
             ))}
         </div>

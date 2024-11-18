@@ -1,7 +1,7 @@
 import Loader from "./Loader";
 
 const LoaderLayout = () => (
-    <div className="absolute inset-0 flex justify-center items-center">
+    <div className="flex justify-center items-center bg-[#121A21] min-h-screen">
         <Loader />
     </div>
 );

@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import { FaSearch } from "react-icons/fa";
 
 interface SearchBarProps {
     onSearch: (query: string) => void;
+    placeholder?: string;
 }
 
-const SearchBar = ({ onSearch }: SearchBarProps) => {
+const SearchBar = ({ onSearch, placeholder = "Buscar" }: SearchBarProps) => {
     const [query, setQuery] = useState("");
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,13 +16,15 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
     };
 
     return (
-        <div className="flex items-center justify-center mb-6">
+        <div className="flex items-center justify-start mb-6 w-full bg-[#243647] rounded-md px-2">
+            <FaSearch className="text-white" />
+
             <Input
                 type="text"
                 value={query}
                 onChange={handleInputChange}
-                placeholder="Buscar"
-                className="px-4 py-2 w-64 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                placeholder={placeholder}
+                className="text-white w-full border-none focus:ring-0 focus:border-0 outline-none"
             />
         </div>
     );

@@ -1,5 +1,6 @@
 import { getPeople } from "@/services/people/getPeople";
 import { useQuery } from "@tanstack/react-query";
+import useError from "../useError";
 
 export default function usePeople(page: number, searchQuery: string) {
     const queryKey = ["people", page, searchQuery];
@@ -9,11 +10,7 @@ export default function usePeople(page: number, searchQuery: string) {
         queryFn: () => getPeople({ page, searchQuery }),
     });
 
-    const errorMessage = isError
-        ? error instanceof Error
-            ? error.message
-            : "Error desconocido"
-        : "";
+    const errorMessage = useError(error);
 
     return { data, isLoading, isFetching, isError, errorMessage, refetch };
 }

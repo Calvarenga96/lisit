@@ -3,37 +3,43 @@ import { getPlanets } from "@/services/planets/getPlanets";
 import { getPerson } from "@/services/people/getPerson";
 import { ApiResponse } from "@/types/api";
 import { Planets } from "@/types/planets";
+import useError from "../useError";
 
-const queryFnHandler = (useGetPlanet: boolean, id: string) => {
-    if (useGetPlanet && typeof id === "string") {
-        return getPlanetAndResidentsHandler({ id });
+const fetchPlanetDetails = async (
+    id: string
+): Promise<ApiResponse<Planets>> => {
+    const planetResponse = await getPlanets({ page: 1, searchQuery: id });
+    const planet = planetResponse.results[0];
+
+    if (!planet) {
+        throw new Error("Planet not found.");
     }
-    return getPlanets({ page: 1, searchQuery: id });
+
+    const residents = await fetchResidents(planet.residents as string[]);
+    return {
+        ...planetResponse,
+        results: [
+            {
+                ...planet,
+                residents,
+            },
+        ],
+    };
 };
 
-const getPlanetAndResidentsHandler = async ({ id }: { id: string }) => {
-    try {
-        const planet = await getPlanets({ page: 1, searchQuery: id });
-        const residentsURL = planet.results[0].residents as string[];
-        const residents = await Promise.all(
-            residentsURL.map(async (resident: string) => {
-                const id = parseInt(resident.split("/")[5]);
-                return await getPerson({ id });
-            })
-        );
+const fetchResidents = async (residentUrls: string[]) => {
+    return Promise.all(
+        residentUrls.map(async (url) => {
+            const id = parseInt(url.split("/")[5]);
+            return await getPerson({ id });
+        })
+    );
+};
 
-        const updatedData: ApiResponse<Planets> = {
-            ...planet,
-            results: planet.results.map((item) => ({
-                ...item,
-                residents: residents.map((resident) => resident),
-            })),
-        };
-
-        return updatedData;
-    } catch (error) {
-        console.error(error);
-    }
+const queryFnHandler = (useGetPlanet: boolean, id: string) => {
+    return useGetPlanet && id
+        ? fetchPlanetDetails(id)
+        : getPlanets({ page: 1, searchQuery: id });
 };
 
 export function usePlanetDetails(
@@ -44,19 +50,13 @@ export function usePlanetDetails(
 
     const { data, isLoading, isError, error, refetch } = useQuery({
         queryKey,
-        queryFn: () =>
-            typeof id === "string" ? queryFnHandler(useGetPlanet, id) : null,
-        enabled: !!id,
+        queryFn: () => (id ? queryFnHandler(useGetPlanet, id) : null),
     });
 
-    const errorMessage = isError
-        ? error instanceof Error
-            ? error.message
-            : "Error desconocido"
-        : "";
+    const errorMessage = useError(error);
 
     return {
-        planet: data?.results?.[0],
+        data: data?.results?.[0],
         isLoading,
         isError,
         errorMessage,
