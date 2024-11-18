@@ -5,23 +5,9 @@ import {
     NavigationMenuItem,
     NavigationMenuList,
 } from "./ui/navigation-menu";
+import { links } from "@/constants/links";
 
 export function AppNavigationMenu() {
-    const links = [
-        {
-            to: "/people",
-            label: "Personas",
-        },
-        {
-            to: "/planets",
-            label: "Planetas",
-        },
-        {
-            to: "/starships",
-            label: "Naves",
-        },
-    ];
-
     return (
         <NavigationMenu className="flex flex-col gap-2 justify-between w-full p-4 md:p-8 md:flex-row border-b-2 border-b-white">
             <div>
